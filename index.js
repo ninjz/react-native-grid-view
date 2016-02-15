@@ -51,6 +51,8 @@ var CollectionView = React.createClass({
           style={this.props.style}
           onEndReached={this.props.onEndReached}
           scrollEnabled={this.props.scrollEnabled}
+          renderHeader={this.props.renderHeader}
+          renderFooter={this.props.renderFooter}
           pageSize={this.props.pageSize | 1}
         />);
     },
@@ -60,8 +62,6 @@ var CollectionView = React.createClass({
 var styles = StyleSheet.create({
   group: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
   }
 });
 
