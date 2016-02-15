@@ -29,7 +29,14 @@ var CollectionView = React.createClass({
         return itemsGroups;
     },
     getInitialState: function() {
-        return {items: [], renderItem: null, style: undefined, itemsPerRow: 1, onEndReached: undefined};
+        return {
+          items: [],
+          dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+          renderItem: null,
+          style: undefined,
+          itemsPerRow: 1,
+          onEndReached: undefined
+        };
     },
     renderGroup: function(group) {
       var that = this;
@@ -44,9 +51,9 @@ var CollectionView = React.createClass({
     },
     render: function() {
         var groups = this.groupItems(this.props.items, this.props.itemsPerRow);
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
         return (<ListView
-          dataSource={ds.cloneWithRows(groups)}
+          dataSource={this.state.dataSource.cloneWithRows(groups)}
           renderRow={this.renderGroup}
           style={this.props.style}
           onEndReached={this.props.onEndReached}
